@@ -1,33 +1,50 @@
 <template>
   <div class="feed">
     <div class="feed__user mb-16 mt-32">
-      <avatar
-        avatar="https://picsum.photos/200/300"
-        class="feed__avatar mr-16"
-      />
-      <div class="feed__username">John Doe</div>
+      <div class="feed__avatar mr-16">
+        <avatar
+            :username="username"
+            :avatar="avatar"
+        />
+      </div>
     </div>
-    <div class="feed__card">
-      <slot name="card"></slot>
+    <div class="feed__card g-container">
+      <slot name="card">
+        <card />
+      </slot>
+        <stats
+            :star="stars"
+            :fork="forks"
+        />
     </div>
     <div class="feed__toggler">
-      <toggler @toggle="showComment" class="mb-12" />
-      <ul class="feed__comment_list" v-if="isShowComments">
-        <li class="feed__comment_item comment" v-for="elem in 5" :key="elem">
-          <comment username="John Doe" text="Hello" />
-        </li>
-      </ul>
+      <toggler @onToggle="showComment" class="mb-12" />
+      <div class="feed__comment" v-if="isShowComments">
+        <ul class="feed__comment_list">
+          <li class="feed__comment_item comment" v-for="user in users" :key="user.id">
+            <comment
+              :username="user.username"
+              :text="user.text"
+            />
+          </li>
+        </ul>
+      </div>
       <div class="feed__date">15 May</div>
     </div>
   </div>
 </template>
 
 <script>
+import { card } from '../card';
+import { stats } from '../stats';
 import { avatar } from "../../components/avatar";
 import { toggler } from "../toggler";
 import { comment } from "../comment";
+import users from './data.json';
 export default {
   components: {
+    card,
+    stats,
     avatar,
     toggler,
     comment,
@@ -36,15 +53,31 @@ export default {
   data() {
     return {
       isShowComments: false,
+      users,
     };
   },
 
   methods: {
-    showComment(state) {
-      // console.log(state);
-      this.isShowComments = state;
+    showComment(isOpened) {
+      this.isShowComments = isOpened;
     },
   },
+  props: {
+    username: {
+      type: String,
+      required: true
+    },
+    avatar: {
+      type: String,
+      required: true
+    },
+    stars: {
+      type: Number
+    },
+    forks: {
+      type: Number
+    }
+  }
 };
 </script>
 
@@ -54,11 +87,14 @@ export default {
     display: flex;
     align-items: center;
   }
-
-  &__username {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 18px;
+  &__card {
+    padding: 20px 24px;
+    background: #ffffff;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
+    margin-bottom: 18px;
+    width: 1000px;
   }
   &__date {
     text-transform: uppercase;

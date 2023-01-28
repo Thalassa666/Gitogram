@@ -21,23 +21,31 @@
     </topline>
   </div>
   <ul class="feeds__list">
-    <li class="feeds__item feed" v-for="item in 5" :key="item">
-      <feed>
-        <template #card>
-          <card title="VUE.JS" desc="JavaScript framework for building interactive web applications ⚡" :star="156" :fork="4"/>
-        </template>
+    <li class="feeds__item feed" v-for="item in items" :key="item.id">
+      <feed
+        :username="item.name"
+        :stars="item.stargazers_count"
+        :forks="item.forks_count"
+        :avatar="item.owner.avatar_url">
+                    <template #card>
+                        <card
+                        :description="item.description"
+                        :username="item.owner.login"
+                        ></card>
+                    </template>
       </feed>
     </li>
   </ul>
 </template>
 
 <script>
+import * as api from '../../api'
 import { topline } from '../../components/topline'
 import { icon } from '../../components/icons'
 import { navMenu } from '../../components/NavMenu'
 import { storyUserItem } from '../../components/storyUserItem'
 import { feed } from '../../components/feed'
-import { card } from '@/components/card'
+import { card } from '../../components/card'
 import stories from './data.json'
 export default {
   name: 'feeds',
@@ -51,7 +59,16 @@ export default {
   },
   data () {
     return {
-      stories
+      stories,
+      items: []
+    }
+  },
+  async created () {
+    try {
+      const { data } = await api.trendings.getTrendings()
+      this.items = data.items
+    } catch (error) {
+      console.log(error)
     }
   }
 }

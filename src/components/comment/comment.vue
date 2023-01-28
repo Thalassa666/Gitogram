@@ -1,7 +1,7 @@
 <template>
   <div class="comment">
-    <div class="comment__username mr-8">{{ username }}</div>
-    <div class="comment__text">{{ text }}</div>
+      <span class="comment__username mr-8">{{ username }}</span>
+      {{ text }}
   </div>
 </template>
 
@@ -22,8 +22,6 @@ export default {
 
 <style lang="scss" scoped>
 .comment {
-    display: flex;
-    align-items: center;
   &__username {
     font-weight: bold;
     font-size: 14px;

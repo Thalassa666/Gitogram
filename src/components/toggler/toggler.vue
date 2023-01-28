@@ -14,7 +14,7 @@ export default {
   components: {
     icon
   },
-  emits: ['toggle'],
+  emits: ['onToggle'],
   data () {
     return {
       isOpened: false
@@ -23,7 +23,7 @@ export default {
   methods: {
     toggle () {
       this.isOpened = !this.isOpened
-      this.$emit('toggle', this.isOpened)
+      this.$emit('onToggle', this.isOpened)
     }
   }
 }

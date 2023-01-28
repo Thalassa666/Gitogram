@@ -40,6 +40,7 @@ export default {
 <style lang="scss" scoped>
 .stats {
   display: flex;
+  margin-bottom: 20px;
   &__border {
     border: 1px solid rgba(27, 31, 35, 0.15);
     display: flex;

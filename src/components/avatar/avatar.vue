@@ -1,12 +1,17 @@
 <template>
-  <div class="avatar" :style="avatarStyle">
-    <img :src="avatar" alt="users avatar" />
+  <div class="feed__avatar" :style="avatarStyle">
+    <img :src="avatar" alt="users avatar" class="feed__avatar_icon" />
+    <h2 class="feed__avatar_name">{{ username }}</h2>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    username: {
+      type: String,
+      required: true,
+    },
     avatar: {
       type: String,
       required: true,
@@ -39,9 +44,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.avatar {
-  border-radius: 50%;
-  overflow: hidden;
+.feed__avatar {
+  display: flex;
+  align-items: center;
+
+  &_icon {
+    overflow: hidden;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+
+  &_name {
+    font-weight: 700;
+    font-size: 14px;
+    min-width: 200px;
+  }
 }
 
 </style>
