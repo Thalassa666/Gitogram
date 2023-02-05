@@ -49,9 +49,8 @@ export default {
   align-items: center;
 
   &_icon {
-    overflow: hidden;
-    width: 44px;
     height: 44px;
+    min-width: 44px;
     border-radius: 50%;
     margin-right: 12px;
   }

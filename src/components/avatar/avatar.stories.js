@@ -8,7 +8,7 @@ export default {
 const template = () => ({
   components: { avatar },
   template: `
-      <avatar avatar="https://i.picsum.photos/id/852/200/300.jpg?hmac=6IMZOkPF_q5nf8IwfYdfxPUyKnyPL1w8moDjTeMOT5g"></avatar>
+      <avatar username='React.reposit' avatar="../../assets/png/profile_photo.png"></avatar>
     `
 })
 
