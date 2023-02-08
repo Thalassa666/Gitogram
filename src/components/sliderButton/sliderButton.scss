@@ -1,0 +1,24 @@
+.slider-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 37px;
+    height: 37px;
+
+    &:hover .slider-button__icon {
+      color: #31AE54;
+    }
+
+    &--right {
+      .slider-button__icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__icon {
+       width: 18px;
+       height: 17px;
+       color: #404040;
+       transition: 0.3s;
+    }
+}
