@@ -1,9 +1,22 @@
+.wrapper_storyPage {
+    background: #000;
+    height: 100vh;
+}
+.c-topline_black {
+    background: black;
+    border-bottom: none;
+}
+.headline_black {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .story-page_container {
     width: 375px;
     align-items: center;
     margin: 0 auto;
 }
-.c-loading {
+.c-progress {
     margin-bottom: 18px;
 }
 .story_avatar {
@@ -21,4 +34,29 @@
     content: attr(data-hover-text);
     color: #FFFFFF;
     font-weight: 700;
+}
+.logo_svg {
+    width: 174px;
+    height: 36px;
+}
+.cross_svg {
+    width: 22px;
+    height: 22px;
+}
+.header {
+    margin-bottom: 200px;
+}
+
+.stories_list {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    transform: translateX(0);
+    transition: transform .4s;
+}
+.stories_container {
+    height: 660px;
+    position: relative;
 }

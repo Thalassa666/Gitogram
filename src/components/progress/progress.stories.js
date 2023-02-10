@@ -1,8 +1,8 @@
-import loading from './loading.vue'
+import progress from './progress.vue'
 
 export default {
-  title: 'loading',
-  component: { loading },
+  title: 'progress',
+  component: { progress },
   argTypes: {
     onFinish: {
       action: 'onFinish',
@@ -13,12 +13,12 @@ export default {
 }
 
 const template = (args) => ({
-  components: { xLoading: loading },
+  components: { xProgress: progress },
   data () {
     return { args }
   },
   template: `
-    <x-loading @onFinish="args.onFinish"></x-loading>
+    <x-progress @onFinish="args.onFinish"></x-progress>
   `
 })
 

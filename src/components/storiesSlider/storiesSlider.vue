@@ -1,33 +1,29 @@
 <template>
-  <div class="wrapper wrapper_storyPage">
-    <topline class="c-topline_black">
-      <template #headline>
-        <div class="headline_black">
-            <button class="logo_button" @click="$router.push('/#')">
-                <icon class="logo_svg" name="gitoWhite"></icon>
-            </button>
-            <button class="logo_button" @click="$router.push('/#')">
-                <icon class="cross_svg" name="cross"></icon>
-            </button>
-        </div>
-      </template>
-    </topline>
-    <stories-slider
-      :initialSlideId="Number($route.params.initialSlideId)"></stories-slider>
-  </div>
+    <div class="stories_container">
+    <div class="stories">
+    <ul class="stories_list" ref="slider">
+      <li class="stories_item" v-for="trending, ndx in trendings" :key="trending.id" ref="item">
+        <stories-slide
+        :data="getStoryData(trending)"
+        :active="ndx === index"
+        :progress="ndx === index && progress"
+        :btnsShown="activeBtns"
+        @onNextSlide="handleSlide(ndx + 1)"
+        @onPrevSlide="handleSlide(ndx - 1)"
+      />
+      </li>
+     </ul>
+    </div>
+    </div>
 </template>
 
 <script>
-import { icon } from '../../components/icons'
-import { storiesSlider } from '../../components/storiesSlider'
-import { topline } from '../../components/topline/'
+import { storiesSlide } from '../../components/storiesSlide'
 import { mapActions, mapState } from 'vuex'
 export default {
-  name: 'storyPage',
+  name: 'storiesSlider',
   components: {
-    icon,
-    storiesSlider,
-    topline
+    storiesSlide
   },
   data () {
     return {
@@ -35,6 +31,11 @@ export default {
       sliderPosition: 0,
       btnsShown: true,
       progress: false
+    }
+  },
+  props: {
+    initialSlideId: {
+      type: Number
     }
   },
   computed: {
@@ -100,4 +101,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./storyPage.scss" scoped></style>
+<style lang="scss" scoped src="./storiesSlider.scss"></style>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
     <button :class="[
       'btn', 'btn_green',
@@ -14,17 +15,17 @@
 <script>
 
 export default {
-name: 'button',
-props: {
-hoverText: {
-  type: String
-}
-},
-computed: {
-withHoverText () {
-  return this.hoverText?.length
-}
-}
+  name: 'button',
+  props: {
+    hoverText: {
+      type: String
+    }
+  },
+  computed: {
+    withHoverText () {
+      return this.hoverText?.length
+    }
+  }
 
 }
 </script>

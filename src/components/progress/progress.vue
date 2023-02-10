@@ -1,5 +1,5 @@
 <template>
-    <div :class={active} class="loading">
+    <div :class={active} class="progress">
       <div ref="indicator" class="indicator"></div>
     </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
 
 export default {
-  name: 'loading',
+  name: 'progress',
   data () {
     return {
       active: false
@@ -33,4 +33,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped src="./loading.scss"></style>
+<style lang="scss" scoped src="./progress.scss"></style>
