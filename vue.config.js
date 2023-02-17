@@ -1,5 +1,6 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true,
-  publicPath: '/Gitogram/'
-})
+module.exports = {
+  outputDir: './docs',
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/gitogram/'
+    : '/'
+}

@@ -1,22 +1,17 @@
 <template>
-    <div class="spinner"></div>
+  <div class="c-spinner">
+    <icon name="loading" />
+  </div>
 </template>
 
-<style lang="scss" scoped>
-    .spinner{
-    width: 40px;
-    height: 40px;
-    border: 2px solid #f3f3f3;
-    border-top:3px solid green;
-    border-radius: 100%;
-    animation: spin 1s infinite linear;
-}
+<script>
+import { icon } from '../../components/icons'
 
-@keyframes spin {
-    from{
-        transform: rotate(0deg);
-    }to{
-        transform: rotate(360deg);
-    }
+export default {
+  components: {
+    icon
+  }
 }
-</style>
+</script>
+
+<style lang="scss" scoped src="./spinner.scss"></style>

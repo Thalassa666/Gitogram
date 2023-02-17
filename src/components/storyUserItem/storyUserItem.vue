@@ -1,9 +1,9 @@
 <template>
-  <button class="c-story-user-item" @click="$emit('storyPress')">
+  <button class="c-story-user-item" @click="$emit('onPress')">
     <div class="avatar">
-      <img :src="avatar" alt="username avatar" class="img" />
+        <img :src='avatar' class="img" alt="username avatar" />
     </div>
-    <div class="username">{{ username }}</div>
+    <div class="username"> {{ username }}</div>
   </button>
 </template>
 
@@ -18,9 +18,8 @@ export default {
       type: String,
       required: true
     }
-  },
-  emits: ['storyPress']
+  }
 }
 </script>
 
-<style lang="scss" scoped src="./storyUserItem.scss"></style>
+<style lang="scss" src="./storyUserItem.scss" scoped> </style>

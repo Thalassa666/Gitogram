@@ -1,75 +1,117 @@
 <template>
   <div class="topline">
-    <topline>
+    <topLine>
       <template #headline>
-        <div class="headline">
-          <icon name="logo" />
-          <nav-menu />
+        <div class="topline___header">
+          <div class="topline__logo">
+            <logo color='black'></logo>
+          </div>
+          <div class="topline__user-icons">
+            <profileIcons :source="this.user?.avatar_url" @onLogout="logout" @onUser="$router.push({name: 'profile'})" @onHome="$router.push({name: 'feeds'})"></profileIcons>
+          </div>
         </div>
       </template>
       <template #content>
         <ul class="stories">
-          <li class="stories-item" v-for="item in items" :key="item.id">
+          <li class="stories-item" v-for="story in getUnstarredOnly" :key="story.id">
             <story-user-item
-            :avatar="item.owner.avatar_url"
-                  :username="item.owner.login"
-                  @storyPress="Number($router.push({name: 'stories', params: { initialSlideId : item.id }}))"
+              :avatar="story.owner.avatar_url"
+              :username="story.owner.login"
+              @onPress="$router.push({name: 'stories', params: {initialSlide: story.id}})"
             />
           </li>
         </ul>
       </template>
-    </topline>
+    </topLine>
   </div>
-  <ul class="feeds__list">
-    <li class="feeds__item feed" v-for="item in items" :key="item.id">
-      <feed
-        :username="item.name"
-        :stars="item.stargazers_count"
-        :forks="item.forks_count"
-        :avatar="item.owner.avatar_url">
-                    <template #card>
-                        <card
-                        :description="item.description"
-                        :username="item.owner.login"
-                        ></card>
-                    </template>
-      </feed>
+  <ul class="posts">
+    <li class="posts-item" v-for="repos in this.starred" :key="repos.id">
+      <post :nick="repos.owner.login" :path="repos.owner.avatar_url" :comm="getRepoOwner(repos)" @tooggleIssues='tooggleIssues(repos, $event)'>
+        <template #description>
+          <div class="post__content">
+            <div class="post__title" v-text="repos.name"></div>
+            <div class="post__description" v-text="repos.description">
+            </div>
+            <div class="post__starpanel"><counters :stars="repos.stargazers_count" :forks="repos.forks_count"></counters></div>
+          </div>
+        </template>
+      </post>
     </li>
   </ul>
 </template>
-
 <script>
-import * as api from '../../api'
-import { topline } from '../../components/topline'
-import { icon } from '../../components/icons'
-import { navMenu } from '../../components/NavMenu'
-import { storyUserItem } from '../../components/storyUserItem'
-import { feed } from '../../components/feed'
-import { card } from '../../components/card'
+import { topLine } from '@/components/topline'
+import { storyUserItem } from '@/components/storyUserItem'
+import logo from '@/components/logo/logo.vue'
+import profileIcons from '@/components/profileIcons/profileIcons.vue'
+import { post } from '../../components/post'
+import { counters } from '../../components/counters'
+import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   name: 'feeds',
   components: {
-    topline,
-    icon,
-    navMenu,
+    topLine,
     storyUserItem,
-    feed,
-    card
+    post,
+    logo,
+    profileIcons,
+    counters
   },
   data () {
     return {
-      items: []
+    }
+  },
+  computed: {
+    ...mapState({
+      trendings: state => state.data,
+      starred: state => state.likedOfMe,
+      user: state => state.user
+    }),
+    ...mapGetters(['getUnstarredOnly'])
+  },
+  methods: {
+    ...mapActions({
+      fetchTrendings: 'fetchTrendings',
+      fetchLikedOfMe: 'fetchLikedOfMe',
+      fetchUser: 'fetchUser',
+      logout: 'logout',
+      fetchIssue: 'fetchIssue'
+    }),
+    getReposData (repos) {
+      return {
+        title: repos.name,
+        description: repos.description,
+        username: repos.owner.login,
+        stars: repos.stargazers_count
+      }
+    },
+    getRepoOwner (repos) {
+      return {
+        repo: repos.name,
+        owner: repos.owner.login
+      }
+    },
+    async tooggleIssues (repos, event) {
+      if (event && !Object.prototype.hasOwnProperty.call(repos, 'issuesList')) {
+        try {
+          await this.fetchIssue({ id: repos.id, owner: repos.owner.login, repo: repos.name })
+        } catch (error) {
+          console.log(error)
+        }
+      }
     }
   },
   async created () {
     try {
-      const { data } = await api.trendings.getTrendings()
-      this.items = data.items
+      if (!this.trendings.length) {
+        await this.fetchTrendings()
+      }
+      await this.fetchLikedOfMe()
+      await this.fetchUser()
     } catch (error) {
       console.log(error)
     }
   }
 }
 </script>
-
-<style lang="scss" src="./feeds.scss" scoped></style>
+<style src="./feeds.scss" lang="scss" scoped></style>

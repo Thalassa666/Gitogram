@@ -1,4 +1,4 @@
-import { makeRequest } from '../requests'
+import { makeRequest } from '../request'
 
 export const getReadme = ({ owner, repo }) => {
   const contentHeader = 'application/vnd.github.v3.html+json'

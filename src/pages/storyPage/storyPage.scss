@@ -1,23 +1,19 @@
-.wrapper_storyPage {
-    background: #000;
-    height: 100vh;
-}
-.c-topline_black {
-    background: black;
-    border-bottom: none;
-}
 .headline_black {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100vw;
 }
 .story-page_container {
     width: 375px;
     align-items: center;
     margin: 0 auto;
 }
-.c-progress {
+.c-loading {
     margin-bottom: 18px;
+}
+.story_item {
+    position: relative;
 }
 .story_avatar {
     margin-bottom: 13px;
@@ -46,17 +42,6 @@
 .header {
     margin-bottom: 200px;
 }
-
-.stories_list {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    margin-left: -150px;
-    transform: translateX(0);
-    transition: transform .4s;
-}
-.stories_container {
-    height: 660px;
-    position: relative;
+.wrapper_storyPage {
+    background: black;
 }

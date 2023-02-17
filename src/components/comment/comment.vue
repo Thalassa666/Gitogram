@@ -1,31 +1,28 @@
 <template>
-  <div class="comment">
-      <span class="comment__username mr-8">{{ username }}</span>
+  <div class="c-comment">
+    <p>
+      <span class="username">{{ username }}</span>
       {{ text }}
+    </p>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'Comment',
   props: {
-    text: {
-      required: true,
-      type: String,
-    },
     username: {
-      required: true,
       type: String,
+      required: true
     },
-  },
-};
-</script>
-
-<style lang="scss" scoped>
-.comment {
-  &__username {
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 22px;
+    text: {
+      type: String,
+      required: true
+    }
   }
 }
+</script>
+
+<style lang="scss" scoped src="./comment.scss">
+
 </style>

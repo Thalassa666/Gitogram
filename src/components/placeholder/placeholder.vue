@@ -1,55 +1,23 @@
 <template>
-    <div class="textarea">
-        <input class="textarea_input" type="textarea">
-    </div>
-    <div class="placeholder">
-        <input class="placeholder_input" type="placeholder">
-        <input class="placeholder_input input2" type="placeholder">
-        <input class="placeholder_input input3" type="placeholder">
-    </div>
-    <div class="placeholder">
-        <input class="placeholder_input" type="placeholder">
-        <input class="placeholder_input input2" type="placeholder">
-        <input class="placeholder_input input3" type="placeholder">
-    </div>
+  <div class="c-placeholder">
+    <div class="placeholder__top"></div>
+    <ul class="placeholder__list">
+      <li class="placeholder__item" v-for="n in paragraphs" :key="n">
+        <div class="placeholder__p1"></div>
+        <div class="placeholder__p2"></div>
+        <div class="placeholder__p3"></div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
+
 export default {
-  data () {
-    return {
-      paragraphs: '<input class="placeholder_input" type="placeholder">'
-    }
+  props: {
+    paragraphs: Number
   }
 }
 </script>
 
-<style lang="scss" scoped>
-    .placeholder_input {
-    background: #DEDEDE;
-    border: 1px solid #DEDEDE;
-    border-radius: 4px;
-    width: 177px;
-    margin-bottom: 8px;
-}
-
-.input2 {
-    width: 218px;
-    margin-right: 20px;
-}
-
-.input3 {
-    width: 139px;
-}
-.textarea_input {
-    width: 266px;
-    height: 136px;
-    margin-bottom: 22px;
-    background: #DEDEDE;
-    border: 1px solid #DEDEDE;
-    border-radius: 4px;
-}
-.textarea {
-    padding-top: 20px;
-}
-</style>
+<style lang="scss" scoped src="./placeholder.scss"></style>

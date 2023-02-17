@@ -1,6 +1,6 @@
 <template>
   <button :class="['button', { active: isOpened }]" @click="toggle">
-    <span class="text">{{ isOpened ? "Hide" : "View" }} issues</span>
+    <span class="text">{{isOpened ? "Hide":"Show"}} issues</span>
     <span class="icon">
       <icon name="triangle" />
     </span>
@@ -29,4 +29,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./toggler.scss" scoped></style>
+<style lang="scss" scoped src="./toggler.scss"></style>

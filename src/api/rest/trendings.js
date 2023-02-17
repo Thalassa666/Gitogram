@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-sequences */
-import { makeRequest } from '../requests'
+import { makeRequest } from '../request.js'
 
 const addStartingZero = (value) => value < 10 ? `0${value}` : value
 
@@ -15,9 +13,9 @@ export const getTrendings = (lang = 'javascript') => {
     addStartingZero(weekAgo.getDate())
   ].join('-')
 
-  params.append('order', 'desc'),
-  params.append('sort', 'stars'),
-  params.append('per_page', 10),
+  params.append('order', 'desc')
+  params.append('sort', 'stars')
+  params.append('per_page', 10)
   params.append('q', `language:${lang} created:>${formattedDate}`)
 
   return makeRequest({

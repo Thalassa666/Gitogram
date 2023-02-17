@@ -1,13 +1,13 @@
-.stories_list {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    margin-left: -150px;
-    transform: translateX(0);
-    transition: transform .4s;
+.stories-container {
+  height: 660px;
+  position: relative;
 }
-.stories_container {
-    height: 660px;
-    position: relative;
+.stories {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  margin-left: -188px;
+  transition: .4s;
+  bottom: 130px;
 }
