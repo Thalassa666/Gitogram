@@ -2,6 +2,7 @@
   "name": "gitogram",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://thalassa666.github.io/Gitogram/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -9,11 +10,14 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "gh-pages": "^5.0.0",
     "vue": "^3.0.0",
     "vue-router": "4",
     "vuex": "^4.0.2"
