@@ -1,1 +1,0 @@
-export { default as navMenu } from './nav-menu.vue'
